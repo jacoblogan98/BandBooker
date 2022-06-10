@@ -10,18 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_09_225100) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_10_174632) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "applications", force: :cascade do |t|
-    t.bigint "listing_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "band_id", null: false
-    t.index ["band_id"], name: "index_applications_on_band_id"
-    t.index ["listing_id"], name: "index_applications_on_listing_id"
-  end
 
   create_table "bands", force: :cascade do |t|
     t.string "name"
@@ -32,6 +23,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_225100) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "gig_applications", force: :cascade do |t|
+    t.bigint "listing_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "band_id", null: false
+    t.index ["band_id"], name: "index_gig_applications_on_band_id"
+    t.index ["listing_id"], name: "index_gig_applications_on_listing_id"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -65,8 +65,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_225100) do
     t.string "username"
   end
 
-  add_foreign_key "applications", "bands"
-  add_foreign_key "applications", "listings"
+  add_foreign_key "gig_applications", "bands"
+  add_foreign_key "gig_applications", "listings"
   add_foreign_key "listings", "users"
   add_foreign_key "reviews", "bands"
   add_foreign_key "reviews", "users"

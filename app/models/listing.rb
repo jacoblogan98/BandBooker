@@ -1,7 +1,7 @@
 class Listing < ApplicationRecord
   belongs_to :user
-  has_many :applications
-  has_many :bands, through: :applications
+  has_many :gig_applications
+  has_many :bands, through: :gig_applications
 
   validate :event_date_cannot_be_in_the_past, on: :create
 

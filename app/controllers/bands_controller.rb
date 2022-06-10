@@ -1,13 +1,12 @@
 class BandsController < ApplicationController
 
     def index
-        bands = Band.all
-        render json: bands
+        render json: Band.all, status: :ok
     end
 
     def show
         band = find_band
-        render json: band
+        render json: band, status: :ok
     end
 
     private 

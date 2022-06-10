@@ -1,6 +1,6 @@
-class ReviewSerializer < ApplicationSerializer
+class ReviewSerializer < ActiveModel::Serializer
   attributes :id, :rating, :comment
   
-  has_one :band
-  has_one :user
+  belongs_to :band
+  belongs_to :user
 end

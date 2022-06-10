@@ -1,9 +1,9 @@
-class ApplicationsController < ApplicationController
+class GigApplicationsController < ApplicationController
     
     # before_action :authorize_user
 
     def index
-        applications = Application.all
+        applications = GigApplication.all
         render json: applications
     end
 
@@ -15,7 +15,7 @@ class ApplicationsController < ApplicationController
     private 
 
     def find_application
-        Application.find(params[:id])
+        GigApplication.find(params[:id])
     end
 
     def application_params

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :reviews
   resources :bands, only: [:index, :show]
-  resources :applications, only: [:index, :show]
+  resources :gig_applications, only: [:index, :show]
   resources :listings
   resources :users
   

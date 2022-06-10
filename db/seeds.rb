@@ -29,10 +29,10 @@ puts "Done seeding Listings!"
 
 puts "Seeding Bands...."
 
-    b1 = Band.create(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band0@gmail.com", hourly_rate:"$50", location: Faker::Address.city)
-    b2 = Band.create(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band1@gmail.com", hourly_rate:"$60", location: Faker::Address.city)
-    b3 = Band.create(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band2@gmail.com", hourly_rate:"$80", location: Faker::Address.city)
-    b4 = Band.create(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band3@gmail.com", hourly_rate:"$40", location: Faker::Address.city)
+    b1 = Band.create!(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band0@gmail.com", hourly_rate:"$50", location: Faker::Address.city)
+    b2 = Band.create!(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band1@gmail.com", hourly_rate:"$60", location: Faker::Address.city)
+    b3 = Band.create!(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band2@gmail.com", hourly_rate:"$80", location: Faker::Address.city)
+    b4 = Band.create!(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band3@gmail.com", hourly_rate:"$40", location: Faker::Address.city)
     b5 = Band.create(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band4@gmail.com", hourly_rate:"$100", location: Faker::Address.city)
     b6 = Band.create(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band5@gmail.com", hourly_rate:"$86", location: Faker::Address.city)
     b7 = Band.create(name: Faker::Music.band, genre: Faker::Music.genre, description: Faker::Lorem.paragraph_by_chars(number: 256), email: "band6@gmail.com", hourly_rate:"$55", location: Faker::Address.city)
@@ -42,30 +42,30 @@ puts "Seeding Bands...."
 
 puts "Done seeding Bands!"
 
-puts "Seeding Applications...."
+puts "Seeding Gig Applications...."
 
-    a1 = Application.create(listing: l1, band: b1)
-    a2 = Application.create(listing: l2, band: b2)
-    a3 = Application.create(listing: l3, band: b5)
-    a4 = Application.create(listing: l4, band: b4)
-    a5 = Application.create(listing: l11, band: b3)
-    a6 = Application.create(listing: l6, band: b3)
-    a7 = Application.create(listing: l1, band: b3)
-    a8 = Application.create(listing: l8, band: b4)
-    a9 = Application.create(listing: l9, band: b5)
-    a10 = Application.create(listing: l2, band: b1)
-    a11= Application.create(listing: l4, band: b2)
-    a12 = Application.create(listing: l1, band: b5)
-    a13 = Application.create(listing: l8, band: b1)
-    a14 = Application.create(listing: l6, band: b4)
-    a15 = Application.create(listing: l11, band: b1)
+    a1 = GigApplication.create(listing: l1, band: b1)
+    a2 = GigApplication.create(listing: l2, band: b2)
+    a3 = GigApplication.create(listing: l3, band: b5)
+    a4 = GigApplication.create(listing: l4, band: b4)
+    a5 = GigApplication.create(listing: l11, band: b3)
+    a6 = GigApplication.create(listing: l6, band: b3)
+    a7 = GigApplication.create(listing: l1, band: b3)
+    a8 = GigApplication.create(listing: l8, band: b4)
+    a9 = GigApplication.create(listing: l9, band: b5)
+    a10 = GigApplication.create(listing: l2, band: b1)
+    a11= GigApplication.create(listing: l4, band: b2)
+    a12 = GigApplication.create(listing: l1, band: b5)
+    a13 = GigApplication.create(listing: l8, band: b1)
+    a14 = GigApplication.create(listing: l6, band: b4)
+    a15 = GigApplication.create(listing: l11, band: b1)
 
-puts "Done seeding Applications!"
+puts "Done seeding Gig Applications!"
 
 puts "Seeding Reviews...."
 
-    r1 = Review.create(band: b1, rating: 4, comment: Faker::Lorem.paragraph(sentence_count: 4), user: u1)
-    r2 = Review.create(band: b1, rating: 5, comment: Faker::Lorem.paragraph(sentence_count: 4), user: u2)
+    r1 = Review.create!(band: b1, rating: 4, comment: Faker::Lorem.paragraph(sentence_count: 4), user: u1)
+    r2 = Review.create!(band: b1, rating: 5, comment: Faker::Lorem.paragraph(sentence_count: 4), user: u2)
     r3 = Review.create(band: b2, rating: 2, comment: Faker::Lorem.paragraph(sentence_count: 4), user: u4)
     r4 = Review.create(band: b3, rating: 3, comment: Faker::Lorem.paragraph(sentence_count: 4), user: u3)
     r5 = Review.create(band: b3, rating: 5, comment: Faker::Lorem.paragraph(sentence_count: 4), user: u5)
