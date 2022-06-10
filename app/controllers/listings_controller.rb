@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
     def index
         render json: Listing.all, status: :ok
     end
- 
+
     def show
         listing = find_listing
         render json: current_listing, status: :ok

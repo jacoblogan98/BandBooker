@@ -13,6 +13,6 @@ class BandsController < ApplicationController
     private 
     
     def find_band
-        Band.find(id: params[:id])
+        Band.find(params[:id])
     end
 end

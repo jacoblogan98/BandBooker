@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
     
-    before_action :authorize_user
+    # before_action :authorize_user
 
     def index
         applications = Application.all
@@ -15,11 +15,11 @@ class ApplicationsController < ApplicationController
     private 
 
     def find_application
-        Application.find(id: params[:id])
+        Application.find(params[:id])
     end
 
     def application_params
-        params.permit(:id. :band_id, :listing_id)
+        params.permit(:id, :band_id, :listing_id)
     end
 
 end
