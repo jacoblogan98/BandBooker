@@ -6,9 +6,15 @@ import {
 } from "react-router-dom"
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Listings from "./pages/Listings";
 import CreateListingForm from "./components/CreateListingForm";
 import NavBar from "./components/NavBar";
+import Profile from "./pages/Profile";
+import BandInfo from "./pages/BandInfo";
+import GigApplications from "./pages/GigApplications";
+import YourListings from "./pages/YourListings";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
@@ -25,12 +31,36 @@ function App() {
             <About />
           </Route>
 
-          <Route path="/listings">
-            <Listings />
+          <Route path="/login">
+            <Login />
+          </Route>
+
+          <Route path="/signup">
+            <Signup />
           </Route>
 
           <Route path="/createlisting">
             <CreateListingForm />
+          </Route>
+
+          <Route path="/yourlistings">
+            <YourListings />
+          </Route>
+
+          <Route path="/profile">
+            <Profile />
+          </Route>
+
+          <Route path="/editprofile">
+            <EditProfile />
+          </Route>
+
+          <Route path="/gigapplications">
+            <GigApplications />
+          </Route>
+
+          <Route path="/bands/:id">
+            <BandInfo />
           </Route>
 
         </Switch>
