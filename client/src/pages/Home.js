@@ -10,25 +10,25 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import Modal from "react-bootstrap/Modal";
 import { useHistory } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 function Home() {
-    // const renderListings = listings.map((listing) => {
-    //     if (listing.winner_id) {
-    //       return null;
-    //     } else {
-    //       return (
-    //         <ListingItem
-    //           key={listing.id}
-    //           listing={listing}
-    //           user={user}
-    //           handleCardClick={handleCardClick}
-    //           handleDelete={handleDelete}
-    //           isAuthenticated={isAuthenticated}
-    //           setAlert={setAlert}
-    //         />
-    //       );
-    //     }
-    //   });
+    const listings = useSelector(state => state.listings)
+
+    console.log(listings)
+
+    const renderListings = listings.map((listing) => {
+        if (listing.winner_id) {
+            return null;
+        } else {
+            return (
+                <ListingItem
+                    key={listing.id}
+                    listing={listing}
+                />
+            );
+        }
+    });
 
     // function renderAlert() {
     //     return (
@@ -90,7 +90,7 @@ function Home() {
                 </Row>
 
                 <Row xs={1} sm={2} md={3} lg={4}>
-                    {/* {renderListings} */}
+                    {renderListings}
                 </Row>
             </Container>
         </div>

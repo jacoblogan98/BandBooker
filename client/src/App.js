@@ -12,13 +12,16 @@ import YourListings from "./pages/YourListings";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import EditProfile from "./pages/EditProfile";
+import ListingDetails from "./pages/ListingDetails";
 import { setUser } from "./features/userSlice";
+import { fetchListings } from "./features/listingSlice"
 
 function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(setUser())
+    dispatch(fetchListings())
   }, [])
 
   return (
@@ -64,6 +67,10 @@ function App() {
 
         <Route path="/bands/:id">
           <BandInfo />
+        </Route>
+
+        <Route path="/listings/:id">
+          <ListingDetails />
         </Route>
 
       </Switch>

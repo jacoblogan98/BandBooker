@@ -1,6 +1,7 @@
 const initialState = {
     user: "",
-    authorized: false
+    authorized: false,
+    errors: null
 }
 
 const setUser = () => {
@@ -81,7 +82,7 @@ const logOut = () => {
     }
 }
 
-const updateAccount = (user) => {
+const updateAccount = (user, history) => {
     return function (dispatch) {
         fetch(`/users/${user.id}`, {
             method: "PATCH",
@@ -93,7 +94,10 @@ const updateAccount = (user) => {
         })
             .then(res => {
                 if (res.ok) {
-                    res.json().then(updatedUser => dispatch({ type: "update", payload: updatedUser }))
+                    res.json().then(updatedUser => {
+                        dispatch({ type: "update", payload: updatedUser })
+                        history.push('/profile')
+                    })
                 } else {
                     res.json().then(err => console.log(err))
                 }
