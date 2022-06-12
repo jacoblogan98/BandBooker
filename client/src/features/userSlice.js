@@ -1,11 +1,14 @@
-const initialState = {}
+const initialState = {
+    user: "",
+    authorized: false
+}
 
 const setUser = () => {
     return function (dispatch) {
         fetch('/authorized_user')
             .then(res => {
                 if (res.ok) {
-                    res.json().then(authUser => dispatch({ type: 'login', payload: authUser }))
+                    res.json().then(authUser => dispatch({ type: 'login', payload: { user: authUser, authorized: true } }))
                 } else {
                     res.json().then(err => console.log(err))
                 }
@@ -27,7 +30,7 @@ const signUp = (newUser, history) => {
                 if (res.ok) {
                     res.json().then(newUser => {
                         console.log(newUser)
-                        dispatch({ type: "signup", payload: newUser })
+                        dispatch({ type: "signup", payload: { user: newUser, authorized: true } })
                         history.push("/")
                     })
                 } else {
@@ -50,7 +53,7 @@ const logIn = (user, history) => {
             .then(res => {
                 if (res.ok) {
                     res.json().then(user => {
-                        dispatch({ type: "login", payload: user })
+                        dispatch({ type: "login", payload: { user: user, authorized: true } })
                         history.push("/")
                     })
                 } else {
@@ -70,7 +73,7 @@ const logOut = () => {
         })
             .then(res => {
                 if (res.ok) {
-                    dispatch({ type: "logout", payload: {} })
+                    dispatch({ type: "logout", payload: { user: "", authorized: false } })
                 } else {
                     res.json().then(err => console.log(err))
                 }
