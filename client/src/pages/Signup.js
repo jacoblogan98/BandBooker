@@ -1,13 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
+import { useDispatch } from 'react-redux';
+import { signUp } from '../features/userSlice';
 
 function Signup() {
-
     const history = useHistory()
+    const dispatch = useDispatch()
+
+    const [signUpData, setSignUpData] = useState({
+        name: "",
+        username: "",
+        email: "",
+        password: ""
+    })
+
+    function handleChange(e) {
+        const key = e.target.name
+
+        setSignUpData({
+            ...signUpData,
+            [key]: e.target.value
+        })
+    }
+
+    function handleSignUp(e) {
+        e.preventDefault()
+
+        dispatch(signUp(signUpData, history))
+    }
+
 
     return (
         <Container fluid>
@@ -19,14 +44,14 @@ function Signup() {
                 </Row>
 
                 <Row className="mb-5">
-                    <Form >
+                    <Form onSubmit={handleSignUp}>
                         <Form.Group className="mb-3">
                             <Form.Label>Name</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Name..."
-                                // onChange={handleChange}
-                                // value={usernameInput}
+                                onChange={handleChange}
+                                value={signUpData.name}
                                 name="name"
                             />
                         </Form.Group>
@@ -36,8 +61,8 @@ function Signup() {
                             <Form.Control
                                 type="text"
                                 placeholder="Username..."
-                                // onChange={handleChange}
-                                // value={signUpData.username}
+                                onChange={handleChange}
+                                value={signUpData.username}
                                 name="username"
                             />
                         </Form.Group>
@@ -47,8 +72,8 @@ function Signup() {
                             <Form.Control
                                 type="text"
                                 placeholder="Email"
-                                // onChange={handleChange}
-                                // value={signUpData.email}
+                                onChange={handleChange}
+                                value={signUpData.email}
                                 name="email"
                             />
                         </Form.Group>
@@ -58,8 +83,8 @@ function Signup() {
                             <Form.Control
                                 type="password"
                                 placeholder="Password..."
-                                // onChange={handleChange}
-                                // value={signUpData.password}
+                                onChange={handleChange}
+                                value={signUpData.password}
                                 name="password"
                             />
                         </Form.Group>
