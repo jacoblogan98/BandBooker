@@ -7,44 +7,9 @@ import Col from "react-bootstrap/Col";
 import { useHistory } from 'react-router-dom';
 
 function ListingItem({ listing }) {
-    const [buttonState, setButtonState] = useState(null)
     const history = useHistory()
 
-    const { id, title, location, description, date, user } = listing
-
-    function renderButton() {
-        switch (buttonState) {
-            case "UnAuth":
-                return (
-                    <Button variant="primary" >
-                        Enter Raffle
-                    </Button>
-                );
-
-            case "Owner":
-                return (
-                    <Button variant="warning" >
-                        Delete
-                    </Button>
-                );
-
-            case "Entered": {
-                return (
-                    <Button variant="secondary text-white" >
-                        Entered
-                    </Button>
-                );
-            }
-
-            default: {
-                return (
-                    <Button variant="primary" onClick={() => history.push(`/listings/${id}`, listing)}>
-                        View Listing
-                    </Button>
-                );
-            }
-        }
-    }
+    const { id, title } = listing
 
     return (
         <Col>
@@ -61,7 +26,9 @@ function ListingItem({ listing }) {
                     <Container className="ms-2">
                         <Row>
                             <Col className="d-flex justify-content-center">
-                                {renderButton()}
+                                <Button variant="primary" onClick={() => history.push(`/listings/${id}`, listing)}>
+                                    View Listing
+                                </Button>
                             </Col>
                         </Row>
                     </Container>

@@ -8,7 +8,7 @@ function ListingDetails() {
     const locate = useLocation()
     const listing = locate.state
 
-    const { id, title, location, description, date, user } = listing
+    const { id, title, location, description, date, user, gig_applications } = listing
 
     return (
         <Container className="">
@@ -32,11 +32,17 @@ function ListingDetails() {
             <Row className="mt-4 mx-auto" style={{ maxWidth: 1000 }}>
                 <p>{description}</p>
             </Row>
+
             <Row className="mt-4 mx-auto" style={{ maxWidth: 1000 }}>
                 <p>{date}</p>
             </Row>
+
             <Row className="mt-4 mx-auto" style={{ maxWidth: 1000 }}>
                 <p>{user.username}</p>
+            </Row>
+
+            <Row className="mt-4 mx-auto" style={{ maxWidth: 1000 }}>
+                <p>{gig_applications.length} applicants</p>
             </Row>
 
         </Container>
