@@ -1,12 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
+import { useDispatch } from 'react-redux';
+import { logIn } from '../features/userSlice';
 
 function Login() {
     const history = useHistory()
+    const dispatch = useDispatch()
+
+    const [formData, setFormData] = useState({
+        username: "",
+        password: ""
+    })
+
+    function handleChange(e) {
+        const key = e.target.name
+
+        setFormData({
+            ...formData,
+            [key]: e.target.value
+        })
+    }
+
+    function handleLogin(e) {
+        e.preventDefault()
+
+        dispatch(logIn(formData, history))
+    }
 
     return (
         <Container fluid>
@@ -18,24 +41,26 @@ function Login() {
                 </Row>
 
                 <Row className="mb-5">
-                    <Form >
+                    <Form onSubmit={handleLogin}>
                         <Form.Group className="mb-3">
                             <Form.Label>Username</Form.Label>
                             <Form.Control
+                                name="username"
                                 type="text"
                                 placeholder="Username"
-                            // onChange={(e) => setUsernameInput(e.target.value)}
-                            // value={usernameInput}
+                                onChange={handleChange}
+                                value={formData.username}
                             />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
+                                name="password"
                                 type="password"
                                 placeholder="Password"
-                            // onChange={(e) => setPasswordInput(e.target.value)}
-                            // value={passwordInput}
+                                onChange={handleChange}
+                                value={formData.password}
                             />
                         </Form.Group>
                         <Row className="d-flex justify-content-center mb-2">

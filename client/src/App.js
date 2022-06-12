@@ -1,9 +1,6 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom"
+import React, { useEffect } from "react";
+import { Switch, Route } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import Home from "./pages/Home";
 import About from "./pages/About";
 import CreateListingForm from "./components/CreateListingForm";
@@ -15,56 +12,61 @@ import YourListings from "./pages/YourListings";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import EditProfile from "./pages/EditProfile";
+import { setUser } from "./features/userSlice";
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setUser())
+  }, [])
+
   return (
     <>
       <NavBar />
-      <Router>
-        <Switch>
+      <Switch>
 
-          <Route exact path="/">
-            <Home />
-          </Route>
+        <Route exact path="/">
+          <Home />
+        </Route>
 
-          <Route path="/about">
-            <About />
-          </Route>
+        <Route path="/about">
+          <About />
+        </Route>
 
-          <Route path="/login">
-            <Login />
-          </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
 
-          <Route path="/signup">
-            <Signup />
-          </Route>
+        <Route path="/signup">
+          <Signup />
+        </Route>
 
-          <Route path="/createlisting">
-            <CreateListingForm />
-          </Route>
+        <Route path="/createlisting">
+          <CreateListingForm />
+        </Route>
 
-          <Route path="/yourlistings">
-            <YourListings />
-          </Route>
+        <Route path="/yourlistings">
+          <YourListings />
+        </Route>
 
-          <Route path="/profile">
-            <Profile />
-          </Route>
+        <Route path="/profile">
+          <Profile />
+        </Route>
 
-          <Route path="/editprofile">
-            <EditProfile />
-          </Route>
+        <Route path="/editprofile">
+          <EditProfile />
+        </Route>
 
-          <Route path="/gigapplications">
-            <GigApplications />
-          </Route>
+        <Route path="/gigapplications">
+          <GigApplications />
+        </Route>
 
-          <Route path="/bands/:id">
-            <BandInfo />
-          </Route>
+        <Route path="/bands/:id">
+          <BandInfo />
+        </Route>
 
-        </Switch>
-      </Router>
+      </Switch>
     </>
   );
 }
