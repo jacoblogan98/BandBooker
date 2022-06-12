@@ -5,27 +5,32 @@ import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
+import { useDispatch, useSelector } from 'react-redux';
+import { createListing } from '../features/listingSlice'
 
 function CreateListingForm() {
     const [selectedMonth, setSelectedMonth] = useState(null)
 
+    const user = useSelector(state => state.user.user)
+
+    const dispatch = useDispatch()
     const history = useHistory();
 
     const [formData, setFormData] = useState({
-        location: "",
-        image_url: "",
-        what_it_is: "",
-        category: "",
+        title: "",
+        // image_url: "",
         description: "",
+        location: "",
         month: "",
         day: "",
         year: "",
         time: "",
-        // user_id: user.id,
     });
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const key = e.target.name
+
+        setFormData({ ...formData, [key]: e.target.value });
     };
 
 
@@ -155,6 +160,23 @@ function CreateListingForm() {
         return timeOptions;
     }
 
+    function handleSubmit(e) {
+        e.preventDefault()
+        const { title, description, location, year, month, day, time } = formData
+
+
+        const newListing = {
+            title,
+            description,
+            location,
+            date: `${year}-${month}-${day}T${time}:00`,
+            user_id: user.id
+        }
+        console.log(newListing)
+
+        dispatch(createListing(newListing, history))
+    }
+
     return (
         <Container fluid>
             <Container className="mx-auto mt-5">
@@ -163,14 +185,14 @@ function CreateListingForm() {
                 </Row>
 
                 <Row className="mb-5">
-                    <Form >
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3">
                             <Form.Label>Title</Form.Label>
                             <Form.Control
                                 type="text"
-                                name="Title"
+                                name="title"
                                 placeholder="Title..."
-                                value={formData.Title}
+                                value={formData.title}
                                 onChange={(e) => handleChange(e)}
                             />
                         </Form.Group>
@@ -192,7 +214,7 @@ function CreateListingForm() {
                                 type="text"
                                 name="location"
                                 placeholder="Location..."
-                                value={formData.what_it_is}
+                                value={formData.location}
                                 onChange={(e) => handleChange(e)}
                             />
                         </Form.Group>

@@ -23,8 +23,6 @@ function Home() {
         setFilteredListings(listings)
     }, [listings])
 
-    console.log(listings)
-
     const handleSortAlphabetically = () => {
         if (filtered === false) {
             const sortedListings = listings.sort(function (a, b) {

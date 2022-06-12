@@ -40,7 +40,7 @@ const createListing = (newListing, history) => {
                 if (res.ok) {
                     res.json().then(newList => {
                         dispatch({ type: 'listings/add', payload: newList })
-                        history.push('/yourlistings')
+                        history.push('/')
                     })
                 } else {
                     res.json().then(err => console.log(err))
