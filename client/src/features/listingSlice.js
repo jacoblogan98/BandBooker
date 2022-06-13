@@ -72,7 +72,7 @@ const editListing = (listing, history) => {
     }
 }
 
-const deleteListing = (id) => {
+const deleteListing = (id, history) => {
     return function (dispatch) {
         fetch(`/listings/${id}`, {
             method: "DELETE",
@@ -84,6 +84,7 @@ const deleteListing = (id) => {
             .then(res => {
                 if (res.ok) {
                     dispatch({ type: "listings/delete", payload: id })
+                    history.push('/yourlistings')
                 } else {
                     res.json().then(err => console.log(err))
                 }

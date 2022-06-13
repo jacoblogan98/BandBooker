@@ -5,16 +5,21 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { deleteListing } from '../features/listingSlice';
 
 function ListingDetails() {
     const locate = useLocation()
+    const dispatch = useDispatch()
     const history = useHistory()
     const listing = locate.state
     const currUser = useSelector(state => state.user.user)
 
-    console.log(currUser)
-
     const { id, title, location, description, date, user, gig_applications } = listing
+
+    function handleDelete() {
+        dispatch(deleteListing(id, history))
+    }
 
     const renderButtons = () => {
         if (user.id === currUser.id) {
@@ -22,7 +27,7 @@ function ListingDetails() {
                 <>
                     <Button onClick={() => history.push(`/listings/${id}/applicants`)}>View Applicants</Button>
                     <Button onClick={() => history.push(`/listings/${id}/edit`, listing)}>Edit Listing</Button>
-                    <Button>Delete Listing</Button>
+                    <Button onClick={handleDelete}>Delete Listing</Button>
                 </>
             )
         }
