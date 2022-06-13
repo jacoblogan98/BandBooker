@@ -1,7 +1,10 @@
 class Listing < ApplicationRecord
   belongs_to :user
-  has_many :gig_applications
+  belongs_to :band
+  has_many :gig_applications, dependent: :destroy
   has_many :bands, through: :gig_applications
+
+  after_update :destroy_gig_applications
 
   validate :event_date_cannot_be_in_the_past, on: :create
 
@@ -28,6 +31,12 @@ class Listing < ApplicationRecord
     parsed_time = Time.local(year, month, day, hour, minute)
 
     return parsed_time
+  end
+
+  def destroy_gig_applications
+    if self.band_id
+      self.gig_applications.destroy_all
+    end
   end
 
 end

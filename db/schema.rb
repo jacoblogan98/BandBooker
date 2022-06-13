@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_10_174632) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_13_182619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_174632) do
     t.string "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "band_id"
+    t.index ["band_id"], name: "index_listings_on_band_id"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
@@ -67,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_174632) do
 
   add_foreign_key "gig_applications", "bands"
   add_foreign_key "gig_applications", "listings"
+  add_foreign_key "listings", "bands"
   add_foreign_key "listings", "users"
   add_foreign_key "reviews", "bands"
   add_foreign_key "reviews", "users"

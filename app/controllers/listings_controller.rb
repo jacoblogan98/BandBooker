@@ -36,7 +36,7 @@ class ListingsController < ApplicationController
     end
 
     def listing_params
-        params.permit(:id, :user_id, :title, :location, :description, :date)
+        params.permit(:id, :user_id, :title, :location, :description, :date, :band_id)
     end
     
 end

@@ -5,17 +5,31 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useHistory, useParams } from 'react-router-dom';
+import { editListing } from '../features/listingSlice';
+import { useDispatch } from 'react-redux';
 
 function BandItem({ band }) {
     const history = useHistory()
+    const dispatch = useDispatch()
     const params = useParams()
 
     const { id, name } = band
 
+    function handleHireBand() {
+        const hiredBandObj = {
+            id: params.id,
+            band_id: id
+        }
+
+        dispatch(editListing(hiredBandObj, history))
+    }
+
     const renderHireButton = params.id
-        ? <Button variant="primary" onClick={() => history.push(`/bands/${id}`, band)}>
+        ? <Button variant="primary" onClick={handleHireBand}>
             Hire Band
         </Button> : null
+
+
     return (
         <Col>
             <Card className="h-100">
