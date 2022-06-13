@@ -16,6 +16,7 @@ import ListingDetails from "./pages/ListingDetails";
 import Bands from "./pages/Bands";
 import { setUser } from "./features/userSlice";
 import { fetchListings } from "./features/listingSlice"
+import { fetchBands } from './features/bandsSlice'
 
 function App() {
   const dispatch = useDispatch()
@@ -23,7 +24,8 @@ function App() {
   useEffect(() => {
     dispatch(setUser())
     dispatch(fetchListings())
-  }, [])
+    dispatch(fetchBands())
+  }, [dispatch])
 
   return (
     <>

@@ -9,7 +9,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import BandItem from '../components/BandItem';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBands } from '../features/bandsSlice'
 
 function Bands() {
     const [filteredBands, setFilteredBands] = useState([])
@@ -17,12 +16,11 @@ function Bands() {
     const [filtered, setFiltered] = useState(false)
 
     const dispatch = useDispatch()
-    const bands = useSelector(state => state.bands)
+    const bands = useSelector(state => state.bands.all)
 
     useEffect(() => {
-        dispatch(fetchBands())
         setFilteredBands(bands)
-    }, [])
+    }, [bands])
 
     const handleSortAlphabetically = () => {
         if (filtered === false) {

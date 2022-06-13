@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useLocation } from 'react-router-dom';
-import { getDropdownMenuPlacement } from 'react-bootstrap/esm/DropdownMenu';
+import AddReviewForm from '../components/AddReviewForm';
+import Review from '../components/Review';
 
 function BandInfo() {
     const locate = useLocation()
+
     const band = locate.state
 
-    const { name, genre, description, email, hourly_rate, reviews, location } = band
+    const { name, genre, description, hourly_rate, reviews, location } = band
+
+    const renderReviews = reviews.map((review) => <Review key={review.id} review={review} />)
 
     return (
         <Container>
@@ -45,6 +49,15 @@ function BandInfo() {
             <Row className="mt-4 mx-auto" style={{ maxWidth: 1000 }}>
                 <p>{reviews.length} reviews</p>
             </Row>
+
+            <Container className="mb-4 ">
+                <h2 className="text-center">Reviews</h2>
+                <Row className="justify-content-around">
+                    {renderReviews}
+                </Row>
+                <h2 className="text-center">Leave a Review!</h2>
+                <AddReviewForm bandId={band.id} />
+            </Container>
 
         </Container>
     )
