@@ -33,6 +33,21 @@ const addReview = (newReview) => {
     }
 }
 
+const deleteReview = (id) => {
+    return function (dispatch) {
+        fetch(`/reviews/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => {
+                if (res.ok) {
+                    dispatch({ type: 'reviews/delete', payload: id })
+                } else {
+                    res.json().then(err => console.log(err))
+                }
+            })
+    }
+}
+
 const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'reviews/index':
@@ -41,6 +56,9 @@ const reviewsReducer = (state = initialState, action) => {
         case 'reviews/create':
             return [...state, action.payload]
 
+        case 'reviews/delete':
+            return state.filter(review => review.id !== action.payload)
+
         default:
             return state
     }
@@ -48,4 +66,4 @@ const reviewsReducer = (state = initialState, action) => {
 
 export default reviewsReducer
 
-export { fetchReviews, addReview }
+export { fetchReviews, addReview, deleteReview }

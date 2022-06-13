@@ -2,8 +2,14 @@ import React from 'react'
 import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
 import Col from "react-bootstrap/Col"
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { deleteReview } from '../features/reviewSlice'
 
 function Review({ review }) {
+    const dispatch = useDispatch()
+    const currUser = useSelector(state => state.user.user)
+
     const Arr = []
 
     for (let i = review.rating; i > 0; i--) {
@@ -16,6 +22,11 @@ function Review({ review }) {
 
     const renderStars = Arr.map((starClass, i) => <span key={i} className={starClass}></span>)
 
+    function handleDeleteReview() {
+        console.log(review)
+        dispatch(deleteReview(review.id))
+    }
+
     return (
         <Col>
             <Card
@@ -27,8 +38,7 @@ function Review({ review }) {
                 <Card.Body>
                     <Card.Title>{review.user.username}</Card.Title>
                     <Card.Text>{review.comment}</Card.Text>
-                    {/* <Button onClick={() => deleteReview(instanceReview.id)}> Delete Review</Button> */}
-
+                    {currUser.id === review.user.id ? <Button onClick={handleDeleteReview}> Delete Review</Button> : null}
                 </Card.Body>
             </Card>
         </Col>
