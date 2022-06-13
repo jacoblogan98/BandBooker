@@ -19,11 +19,11 @@ function YourListings() {
 
     const currUser = useSelector(state => state.user.user)
 
-    const listings = useSelector(state => state.listings.filter((listing) => listing.user.id === currUser.id))
+    const listings = useSelector(state => state.listings)
 
     useEffect(() => {
-        setFilteredListings(listings)
-    }, [])
+        setFilteredListings(listings.filter(listing => listing.user.id === currUser.id))
+    }, [listings, currUser.id])
 
     const handleSortAlphabetically = () => {
         if (filtered === false) {
@@ -61,32 +61,11 @@ function YourListings() {
         }
     });
 
-    // function renderAlert() {
-    //     return (
-    //       <Modal show={alert} onHide={() => setAlert(false)}>
-    //         <Modal.Header className="bg-dark text-white" closeButton>
-    //           <Modal.Title >Log In or Sign Up</Modal.Title>
-    //         </Modal.Header>
-    //         <Modal.Body>
-    //           You must be logged in to enter a raffle. Click one of the options below to get raffle ready. Or click away to continue browsing as a guest.
-    //         </Modal.Body>
-    //         <Modal.Footer>
-    //           <Button variant="primary" onClick={() => history.push('/login')}>
-    //             Login
-    //           </Button>
-    //           <Button variant="secondary" className="text-white" onClick={() => history.push('/signup')}>
-    //             Sign Up
-    //           </Button>
-    //         </Modal.Footer>
-    //       </Modal>
-    //     )
-    //   }
-
     const renderListings = afterSearch.map((listing) => {
         const now = new Date().getTime()
         const end = new Date(listing.date)
 
-        if (listing.band_id || end < now) {
+        if (end < now) {
             return null;
         } else {
             return (
