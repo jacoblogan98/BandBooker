@@ -12,8 +12,6 @@ function BandInfo() {
     const band = locate.state
     const reviews = useSelector(state => state.reviews)
 
-    console.log(band)
-
     const { id, name, genre, description, hourly_rate, location } = band
 
     const selectedReviews = reviews.filter(review => review.band.id === id)

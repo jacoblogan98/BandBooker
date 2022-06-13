@@ -14,10 +14,12 @@ import Signup from "./pages/Signup";
 import EditProfile from "./pages/EditProfile";
 import ListingDetails from "./pages/ListingDetails";
 import Bands from "./pages/Bands";
+import Applicants from "./pages/Applicants";
 import { setUser } from "./features/userSlice";
 import { fetchListings } from "./features/listingSlice"
 import { fetchBands } from './features/bandsSlice'
 import { fetchReviews } from "./features/reviewSlice";
+import { fetchGigApplications } from "./features/gigApplicationsSlice";
 
 function App() {
   const dispatch = useDispatch()
@@ -27,6 +29,7 @@ function App() {
     dispatch(fetchListings())
     dispatch(fetchBands())
     dispatch(fetchReviews())
+    dispatch(fetchGigApplications())
   }, [dispatch])
 
   return (
@@ -78,8 +81,12 @@ function App() {
           <BandInfo />
         </Route>
 
-        <Route path="/listings/:id">
+        <Route exact path="/listings/:id">
           <ListingDetails />
+        </Route>
+
+        <Route path="/listings/:id/applicants">
+          <Applicants />
         </Route>
 
       </Switch>

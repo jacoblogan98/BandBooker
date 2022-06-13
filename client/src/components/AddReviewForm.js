@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showBand } from '../features/bandsSlice';
 import { addReview } from '../features/reviewSlice';
 
 function AddReviewForm({ bandId }) {
