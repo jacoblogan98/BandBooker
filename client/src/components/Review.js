@@ -4,7 +4,6 @@ import Button from "react-bootstrap/Button"
 import Col from "react-bootstrap/Col"
 
 function Review({ review }) {
-    console.log(review)
     const Arr = []
 
     for (let i = review.rating; i > 0; i--) {
