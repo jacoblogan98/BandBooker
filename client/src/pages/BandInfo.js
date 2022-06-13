@@ -9,8 +9,10 @@ import { useSelector } from 'react-redux';
 
 function BandInfo() {
     const locate = useLocation()
-    const band = locate.state.band
+    const band = locate.state
     const reviews = useSelector(state => state.reviews)
+
+    console.log(band)
 
     const { id, name, genre, description, hourly_rate, location } = band
 
