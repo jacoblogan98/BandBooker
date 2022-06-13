@@ -94,7 +94,7 @@ const updateAccount = (user, history) => {
             .then(res => {
                 if (res.ok) {
                     res.json().then(updatedUser => {
-                        dispatch({ type: "update", payload: updatedUser })
+                        dispatch({ type: "update", payload: { user: updatedUser, authorized: true } })
                         history.push('/profile')
                     })
                 } else {
