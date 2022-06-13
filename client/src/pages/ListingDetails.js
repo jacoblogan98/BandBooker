@@ -21,7 +21,7 @@ function ListingDetails() {
             return (
                 <>
                     <Button onClick={() => history.push(`/listings/${id}/applicants`)}>View Applicants</Button>
-                    <Button>Edit Listing</Button>
+                    <Button onClick={() => history.push(`/listings/${id}/edit`, listing)}>Edit Listing</Button>
                     <Button>Delete Listing</Button>
                 </>
             )

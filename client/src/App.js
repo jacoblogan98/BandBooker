@@ -15,6 +15,7 @@ import EditProfile from "./pages/EditProfile";
 import ListingDetails from "./pages/ListingDetails";
 import Bands from "./pages/Bands";
 import Applicants from "./pages/Applicants";
+import EditListingForm from "./components/EditListingForm";
 import { setUser } from "./features/userSlice";
 import { fetchListings } from "./features/listingSlice"
 import { fetchBands } from './features/bandsSlice'
@@ -87,6 +88,10 @@ function App() {
 
         <Route path="/listings/:id/applicants">
           <Applicants />
+        </Route>
+
+        <Route path="/listings/:id/edit">
+          <EditListingForm />
         </Route>
 
       </Switch>

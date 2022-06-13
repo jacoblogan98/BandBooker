@@ -103,7 +103,9 @@ const listingReducer = (state = initialState, action) => {
             return [...state, action.payload]
 
         case 'listings/update':
-            return [...state, action.payload]
+            const filteredState = state.filter(listing => listing.id !== action.payload.id)
+
+            return [...filteredState, action.payload]
 
         case 'listings/delete':
             return state.filter(listing => listing.id !== action.payload)
