@@ -23,6 +23,8 @@ function Home() {
         setFilteredListings(listings)
     }, [listings])
 
+    console.log(listings)
+
     const handleSortAlphabetically = () => {
         if (filtered === false) {
             const sortedListings = listings.sort(function (a, b) {
@@ -81,7 +83,10 @@ function Home() {
     //   }
 
     const renderListings = afterSearch.map((listing) => {
-        if (listing.winner_id) {
+        const now = new Date().getTime()
+        const end = new Date(listing.date)
+
+        if (listing.band_id || end < now) {
             return null;
         } else {
             return (
@@ -92,6 +97,7 @@ function Home() {
             );
         }
     });
+
 
     return (
         <div>
