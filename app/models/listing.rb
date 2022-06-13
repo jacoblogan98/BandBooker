@@ -1,6 +1,5 @@
 class Listing < ApplicationRecord
   belongs_to :user
-  belongs_to :band
   has_many :gig_applications, dependent: :destroy
   has_many :bands, through: :gig_applications
 
@@ -34,8 +33,8 @@ class Listing < ApplicationRecord
   end
 
   def destroy_gig_applications
-    if self.band_id
-      self.gig_applications.destroy_all
+    if self.band_id != nil
+      self.gig_applications.delete_all
     end
   end
 
