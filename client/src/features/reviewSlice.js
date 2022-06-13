@@ -13,7 +13,7 @@ const fetchReviews = () => {
     }
 }
 
-const addReview = (newReview) => {
+const addReview = (newReview, setErrors) => {
     return function (dispatch) {
         fetch('/reviews', {
             method: "POST",
@@ -27,7 +27,7 @@ const addReview = (newReview) => {
                 if (res.ok) {
                     res.json().then(newReview => dispatch({ type: 'reviews/create', payload: newReview }))
                 } else {
-                    res.json().then(err => console.log(err))
+                    res.json().then(err => setErrors(err))
                 }
             })
     }
@@ -57,7 +57,8 @@ const reviewsReducer = (state = initialState, action) => {
             return [...state, action.payload]
 
         case 'reviews/delete':
-            return state.filter(review => review.id !== action.payload)
+            const filteredReviews = state.filter(review => review.id !== action.payload)
+            return filteredReviews
 
         default:
             return state

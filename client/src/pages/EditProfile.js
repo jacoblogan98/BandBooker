@@ -17,17 +17,14 @@ function EditProfile() {
     })
 
     const locate = useLocation()
+    const history = useHistory();
+    const dispatch = useDispatch()
 
-    const errors = useSelector(state => state.user.errors)
-
-    console.log(errors)
+    const userErrors = useSelector(state => state.user.errors)
 
     const currUser = locate.state
 
     const { id, name, username, email } = currUser
-
-    const history = useHistory();
-    const dispatch = useDispatch()
 
     function handleChange(e) {
         const key = e.target.name
@@ -97,7 +94,7 @@ function EditProfile() {
                             </Button>
                         </Row>
 
-                        {errors ? errors.errors.map(error =>
+                        {userErrors ? userErrors.errors.map(error =>
                             <Row className="text-danger text-center" key={uuid()}>
                                 <strong>{error}</strong>
                             </Row>
