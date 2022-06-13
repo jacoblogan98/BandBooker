@@ -17,6 +17,7 @@ import Bands from "./pages/Bands";
 import { setUser } from "./features/userSlice";
 import { fetchListings } from "./features/listingSlice"
 import { fetchBands } from './features/bandsSlice'
+import { fetchReviews } from "./features/reviewSlice";
 
 function App() {
   const dispatch = useDispatch()
@@ -25,6 +26,7 @@ function App() {
     dispatch(setUser())
     dispatch(fetchListings())
     dispatch(fetchBands())
+    dispatch(fetchReviews())
   }, [dispatch])
 
   return (

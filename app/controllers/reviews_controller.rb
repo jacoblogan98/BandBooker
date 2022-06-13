@@ -4,7 +4,7 @@ class ReviewsController < ApplicationController
     before_action :authorize_user, only: [:create, :update, :destroy]
 
     def index
-        render json: Review.all, status: :ok, adapter: nil
+        render json: Review.all, status: :ok
     end
 
     def show

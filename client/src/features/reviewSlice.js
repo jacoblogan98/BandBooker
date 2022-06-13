@@ -1,5 +1,18 @@
 const initialState = []
 
+const fetchReviews = () => {
+    return function (dispatch) {
+        fetch('/reviews')
+            .then(res => {
+                if (res.ok) {
+                    res.json().then(reviews => dispatch({ type: 'reviews/index', payload: reviews }))
+                } else {
+                    res.json().then(err => console.log(err))
+                }
+            })
+    }
+}
+
 const addReview = (newReview) => {
     return function (dispatch) {
         fetch('/reviews', {
@@ -22,6 +35,9 @@ const addReview = (newReview) => {
 
 const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'reviews/index':
+            return action.payload
+
         case 'reviews/create':
             return [...state, action.payload]
 
@@ -32,4 +48,4 @@ const reviewsReducer = (state = initialState, action) => {
 
 export default reviewsReducer
 
-export { addReview }
+export { fetchReviews, addReview }

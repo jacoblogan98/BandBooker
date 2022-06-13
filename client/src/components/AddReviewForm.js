@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { showBand } from '../features/bandsSlice';
 import { addReview } from '../features/reviewSlice';
 
 function AddReviewForm({ bandId }) {
@@ -32,16 +33,17 @@ function AddReviewForm({ bandId }) {
             band_id: bandId
         }
 
-        console.log(newReview)
-
         dispatch(addReview(newReview))
-
+        setFormData({
+            comment: "",
+            rating: ""
+        })
     }
 
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
-            <input onChange={handleChange} type="number" min="1" max="5" name="rating" />
-            <input onChange={handleChange} type="text" name="comment" placeholder="Write your comments here..." />
+            <input onChange={handleChange} value={formData.rating} type="number" min="1" max="5" name="rating" />
+            <input onChange={handleChange} value={formData.comment} type="text" name="comment" placeholder="Write your comments here..." />
             <input type="submit" />
         </form>
     )

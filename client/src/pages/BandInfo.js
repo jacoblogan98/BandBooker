@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useLocation } from 'react-router-dom';
 import AddReviewForm from '../components/AddReviewForm';
 import Review from '../components/Review';
+import { useSelector } from 'react-redux';
 
 function BandInfo() {
     const locate = useLocation()
+    const band = locate.state.band
+    const reviews = useSelector(state => state.reviews)
 
-    const band = locate.state
+    const { id, name, genre, description, hourly_rate, location } = band
 
-    const { name, genre, description, hourly_rate, reviews, location } = band
+    const selectedReviews = reviews.filter(review => review.band.id === id)
 
-    const renderReviews = reviews.map((review) => <Review key={review.id} review={review} />)
+    const renderReviews = selectedReviews.map((review) => <Review key={review.id} review={review} />)
 
     return (
         <Container>
@@ -47,7 +50,7 @@ function BandInfo() {
             </Row>
 
             <Row className="mt-4 mx-auto" style={{ maxWidth: 1000 }}>
-                <p>{reviews.length} reviews</p>
+                <p>{selectedReviews.length} reviews</p>
             </Row>
 
             <Container className="mb-4 ">
@@ -63,4 +66,5 @@ function BandInfo() {
     )
 }
 
-export default BandInfo      
+export default BandInfo
+

@@ -8,14 +8,13 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import BandItem from '../components/BandItem';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 function Bands() {
     const [filteredBands, setFilteredBands] = useState([])
     const [currentSearch, setCurrentSearch] = useState("")
     const [filtered, setFiltered] = useState(false)
 
-    const dispatch = useDispatch()
     const bands = useSelector(state => state.bands.all)
 
     useEffect(() => {
