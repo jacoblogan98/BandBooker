@@ -1,7 +1,6 @@
 const initialState = {
     user: "",
-    authorized: false,
-    errors: null
+    authorized: false
 }
 
 const setUser = () => {

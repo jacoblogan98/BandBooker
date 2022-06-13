@@ -25,6 +25,7 @@ function NavBar() {
                             <Nav className="me-auto">
                                 <Nav.Link href="/createlisting">Create a Listing</Nav.Link>
                                 <Nav.Link href="/yourlistings">Your Listings</Nav.Link>
+                                <Nav.Link href="/bands">Bands</Nav.Link>
                                 <Nav.Link href="/about">About</Nav.Link>
                                 <NavDropdown title="More" id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/profile">Your Profile</NavDropdown.Item>
@@ -39,6 +40,7 @@ function NavBar() {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
+                                <Nav.Link href="/bands">Bands</Nav.Link>
                                 <Nav.Link href="/about">About</Nav.Link>
                                 <Nav.Link href="/login">Log In / Sign Up </Nav.Link>
                             </Nav>

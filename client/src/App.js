@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import EditProfile from "./pages/EditProfile";
 import ListingDetails from "./pages/ListingDetails";
+import Bands from "./pages/Bands";
 import { setUser } from "./features/userSlice";
 import { fetchListings } from "./features/listingSlice"
 
@@ -63,6 +64,10 @@ function App() {
 
         <Route path="/gigapplications">
           <GigApplications />
+        </Route>
+
+        <Route exact path="/bands">
+          <Bands />
         </Route>
 
         <Route path="/bands/:id">
