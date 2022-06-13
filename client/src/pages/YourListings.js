@@ -63,7 +63,7 @@ function YourListings() {
 
     const renderListings = afterSearch.map((listing) => {
         const now = new Date().getTime()
-        const end = new Date(listing.date)
+        const end = new Date(listing.date).getTime()
 
         if (end < now) {
             return null;

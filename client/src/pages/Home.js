@@ -84,7 +84,7 @@ function Home() {
 
     const renderListings = afterSearch.map((listing) => {
         const now = new Date().getTime()
-        const end = new Date(listing.date)
+        const end = new Date(listing.date).getTime()
 
         if (listing.band_id || end < now) {
             return null;
