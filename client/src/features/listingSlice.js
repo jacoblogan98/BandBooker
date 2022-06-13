@@ -43,7 +43,7 @@ const createListing = (newListing, history) => {
                         history.push('/')
                     })
                 } else {
-                    res.json().then(err => console.log(err))
+                    res.json().then(err => dispatch({ type: "listings/error", payload: err }))
                 }
             })
     }
@@ -66,7 +66,7 @@ const editListing = (listing, history) => {
                         history.push('/yourlistings')
                     })
                 } else {
-                    res.json().then(err => console.log(err))
+                    res.json().then(err => { dispatch({ type: "listings/error", payload: err }) })
                 }
             })
     }
@@ -110,6 +110,9 @@ const listingReducer = (state = initialState, action) => {
 
         case 'listings/delete':
             return state.filter(listing => listing.id !== action.payload)
+
+        case 'listings/error':
+            return action.payload
 
         default:
             return state

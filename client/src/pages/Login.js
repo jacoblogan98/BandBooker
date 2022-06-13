@@ -6,10 +6,12 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import { useDispatch } from 'react-redux';
 import { logIn } from '../features/userSlice';
+import { useSelector } from 'react-redux';
 
 function Login() {
     const history = useHistory()
     const dispatch = useDispatch()
+    const errors = useSelector(state => state.user.errors)
 
     const [formData, setFormData] = useState({
         username: "",
@@ -69,11 +71,11 @@ function Login() {
                             </Button>
                         </Row>
 
-                        {/* {error ? (
+                        {errors ? errors.errors.map(error =>
                             <Row className="text-danger text-center">
                                 <strong>{error}</strong>
                             </Row>
-                        ) : null} */}
+                        ) : null}
                     </Form>
                 </Row>
 

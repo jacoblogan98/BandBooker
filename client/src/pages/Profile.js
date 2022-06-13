@@ -18,7 +18,7 @@ function Profile() {
                 <h2>Name: {name}</h2>
                 <h3>Username: {username}</h3>
                 <h6>Email: {email}</h6>
-                <Button className="me-2" onClick={() => history.push("/editprofile")}>
+                <Button className="me-2" onClick={() => history.push("/editprofile", currUser)}>
                     Edit Profile
                 </Button>
                 <Button className="me-2" onClick={() => history.push("/createlisting")}>

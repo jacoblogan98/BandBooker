@@ -7,10 +7,14 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import { useDispatch } from 'react-redux';
 import { editListing } from '../features/listingSlice';
+import { useSelector } from 'react-redux';
 
 
 function EditListingForm() {
     const [selectedMonth, setSelectedMonth] = useState(null)
+    const errors = useSelector(state => state.listings.errors)
+
+    console.log(errors)
 
     const history = useHistory();
     const dispatch = useDispatch()
@@ -22,12 +26,10 @@ function EditListingForm() {
     const [editFormData, setEditFormData] = useState({
         location: "",
         title: "",
-        category: "",
         description: "",
         month: "",
         day: "",
-        year: "",
-        time: ""
+        year: ""
     });
 
     function renderMonths() {
@@ -163,8 +165,13 @@ function EditListingForm() {
     function handleSaveChanges(e) {
         e.preventDefault()
 
+        const { year, month, day, time, location, title, description } = editFormData
+
         const updatedListing = {
-            ...editFormData,
+            title,
+            location,
+            description,
+            date: `${year}-${month}-${day}T${time}:00`,
             id
         }
 
@@ -291,6 +298,11 @@ function EditListingForm() {
                                     Save Changes
                                 </Button>
                             </Row>
+                            {errors ? errors.map(error =>
+                                <Row className="text-danger text-center">
+                                    <strong>{error}</strong>
+                                </Row>
+                            ) : null}
                         </Form>
                     </Row>
 

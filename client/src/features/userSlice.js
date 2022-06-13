@@ -34,7 +34,7 @@ const signUp = (newUser, history) => {
                         history.push("/")
                     })
                 } else {
-                    res.json().then(err => console.log(err))
+                    res.json().then(err => dispatch({ type: 'error', payload: err }))
                 }
             })
     }
@@ -57,7 +57,7 @@ const logIn = (user, history) => {
                         history.push("/")
                     })
                 } else {
-                    res.json().then(err => console.log(err))
+                    res.json().then(err => dispatch({ type: 'error', payload: err }))
                 }
             })
     }
@@ -98,7 +98,7 @@ const updateAccount = (user, history) => {
                         history.push('/profile')
                     })
                 } else {
-                    res.json().then(err => console.log(err))
+                    res.json().then(err => dispatch({ type: 'error', payload: err }))
                 }
             })
     }
@@ -117,6 +117,9 @@ const userReducer = (state = initialState, action) => {
 
         case "update":
             return action.payload
+
+        case "error":
+            return { ...state, errors: action.payload }
 
         default:
             return state

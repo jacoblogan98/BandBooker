@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
@@ -7,6 +7,7 @@ import Form from "react-bootstrap/esm/Form";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { updateAccount } from '../features/userSlice';
+import { v4 as uuid } from 'uuid'
 
 function EditProfile() {
     const [formData, setFormData] = useState({
@@ -15,7 +16,13 @@ function EditProfile() {
         email: ""
     })
 
-    const currUser = useSelector(state => state.user.user)
+    const locate = useLocation()
+
+    const errors = useSelector(state => state.user.errors)
+
+    console.log(errors)
+
+    const currUser = locate.state
 
     const { id, name, username, email } = currUser
 
@@ -89,6 +96,12 @@ function EditProfile() {
                                 Save Changes
                             </Button>
                         </Row>
+
+                        {errors ? errors.errors.map(error =>
+                            <Row className="text-danger text-center" key={uuid()}>
+                                <strong>{error}</strong>
+                            </Row>
+                        ) : null}
                     </Form>
                 </Row>
 

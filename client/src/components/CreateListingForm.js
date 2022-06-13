@@ -7,9 +7,11 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import { useDispatch, useSelector } from 'react-redux';
 import { createListing } from '../features/listingSlice'
+import { v4 as uuid } from 'uuid'
 
 function CreateListingForm() {
     const [selectedMonth, setSelectedMonth] = useState(null)
+    const errors = useSelector(state => state.listings.errors)
 
     const user = useSelector(state => state.user.user)
 
@@ -277,17 +279,17 @@ function CreateListingForm() {
                             </Col>
                         </Row>
 
-                        {/* {errors ? (
-                            <Row className="text-danger text-center mb-2">
-                                {errors.map((err, i) => <strong key={i}>{err}</strong>)}
-                            </Row>
-                        ) : null} */}
-
                         <Row className="d-flex justify-content-center mb-2">
                             <Button variant="primary" type="submit" className="w-25">
                                 Post Listing
                             </Button>
                         </Row>
+
+                        {errors ? errors.map(err =>
+                            <Row className="text-danger text-center mb-2">
+                                <strong key={uuid()}>{err}</strong>
+                            </Row>
+                        ) : null}
                     </Form>
                 </Row>
             </Container>
