@@ -26,7 +26,7 @@ const showListing = (id) => {
     }
 }
 
-const createListing = (newListing, history) => {
+const createListing = (newListing, history, setErrors) => {
     return function (dispatch) {
         fetch('/listings', {
             method: "POST",
@@ -43,13 +43,13 @@ const createListing = (newListing, history) => {
                         history.push('/')
                     })
                 } else {
-                    res.json().then(err => dispatch({ type: "listings/error", payload: err }))
+                    res.json().then(err => setErrors(err))
                 }
             })
     }
 }
 
-const editListing = (listing, history) => {
+const editListing = (listing, history, setErrors) => {
     return function (dispatch) {
         fetch(`/listings/${listing.id}`, {
             method: "PATCH",
@@ -66,7 +66,7 @@ const editListing = (listing, history) => {
                         history.push('/yourlistings')
                     })
                 } else {
-                    res.json().then(err => { dispatch({ type: "listings/error", payload: err }) })
+                    res.json().then(err => setErrors(err))
                 }
             })
     }
@@ -110,9 +110,6 @@ const listingReducer = (state = initialState, action) => {
 
         case 'listings/delete':
             return state.filter(listing => listing.id !== action.payload)
-
-        case 'listings/error':
-            return action.payload
 
         default:
             return state

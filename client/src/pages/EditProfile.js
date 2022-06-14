@@ -15,12 +15,12 @@ function EditProfile() {
         username: "",
         email: ""
     })
+    const [userErrors, setUserErrors] = useState()
 
     const locate = useLocation()
     const history = useHistory();
     const dispatch = useDispatch()
 
-    const userErrors = useSelector(state => state.user.errors)
 
     const currUser = locate.state
 
@@ -43,7 +43,7 @@ function EditProfile() {
             id
         }
 
-        dispatch(updateAccount(editProfile, history))
+        dispatch(updateAccount(editProfile, history, setUserErrors))
     }
 
     return (

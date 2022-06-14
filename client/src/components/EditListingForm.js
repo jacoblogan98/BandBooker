@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 
 function EditListingForm() {
     const [selectedMonth, setSelectedMonth] = useState(null)
-    const errors = useSelector(state => state.listings.errors)
+    const [errors, setErrors] = useState()
 
     console.log(errors)
 
@@ -177,7 +177,7 @@ function EditListingForm() {
 
         console.log(updatedListing)
 
-        dispatch(editListing(updatedListing, history))
+        dispatch(editListing(updatedListing, history, setErrors))
     }
 
     return (
@@ -298,7 +298,7 @@ function EditListingForm() {
                                     Save Changes
                                 </Button>
                             </Row>
-                            {errors ? errors.map(error =>
+                            {errors ? errors.errors.map(error =>
                                 <Row className="text-danger text-center">
                                     <strong>{error}</strong>
                                 </Row>

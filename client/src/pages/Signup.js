@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 function Signup() {
     const history = useHistory()
     const dispatch = useDispatch()
-    const errors = useSelector(state => state.user.errors)
+    const [userErrors, setUserErrors] = useState()
 
     const [signUpData, setSignUpData] = useState({
         name: "",
@@ -33,7 +33,7 @@ function Signup() {
     function handleSignUp(e) {
         e.preventDefault()
 
-        dispatch(signUp(signUpData, history))
+        dispatch(signUp(signUpData, history, setUserErrors))
     }
 
 
@@ -98,7 +98,7 @@ function Signup() {
                             </Button>
                         </Row>
 
-                        {errors ? errors.errors.map(error =>
+                        {userErrors ? userErrors.errors.map(error =>
                             <Row className="text-danger text-center" key={uuid()}>
                                 <strong>{error}</strong>
                             </Row>

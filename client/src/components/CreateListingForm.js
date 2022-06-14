@@ -11,7 +11,9 @@ import { v4 as uuid } from 'uuid'
 
 function CreateListingForm() {
     const [selectedMonth, setSelectedMonth] = useState(null)
-    const errors = useSelector(state => state.listings.errors)
+    const [errors, setErrors] = useState()
+
+    console.log(errors)
 
     const user = useSelector(state => state.user.user)
 
@@ -176,7 +178,7 @@ function CreateListingForm() {
         }
         console.log(newListing)
 
-        dispatch(createListing(newListing, history))
+        dispatch(createListing(newListing, history, setErrors))
     }
 
     return (
@@ -285,9 +287,9 @@ function CreateListingForm() {
                             </Button>
                         </Row>
 
-                        {errors ? errors.map(err =>
-                            <Row className="text-danger text-center mb-2">
-                                <strong key={uuid()}>{err}</strong>
+                        {errors ? errors.errors.map(err =>
+                            <Row className="text-danger text-center mb-2" key={uuid()}>
+                                <strong >{err}</strong>
                             </Row>
                         ) : null}
                     </Form>

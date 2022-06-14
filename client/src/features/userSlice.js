@@ -16,7 +16,7 @@ const setUser = () => {
     }
 }
 
-const signUp = (newUser, history) => {
+const signUp = (newUser, history, setUserErrors) => {
     return function (dispatch) {
         fetch("/signup", {
             method: 'POST',
@@ -34,13 +34,13 @@ const signUp = (newUser, history) => {
                         history.push("/")
                     })
                 } else {
-                    res.json().then(err => dispatch({ type: 'error', payload: err }))
+                    res.json().then(err => setUserErrors(err))
                 }
             })
     }
 }
 
-const logIn = (user, history) => {
+const logIn = (user, history, setUserError) => {
     return function (dispatch) {
         fetch('/login', {
             method: "POST",
@@ -57,7 +57,7 @@ const logIn = (user, history) => {
                         history.push("/")
                     })
                 } else {
-                    res.json().then(err => dispatch({ type: 'error', payload: err }))
+                    res.json().then(err => setUserError(err))
                 }
             })
     }
@@ -81,7 +81,7 @@ const logOut = () => {
     }
 }
 
-const updateAccount = (user, history) => {
+const updateAccount = (user, history, setUserErrors) => {
     return function (dispatch) {
         fetch(`/users/${user.id}`, {
             method: "PATCH",
@@ -98,7 +98,7 @@ const updateAccount = (user, history) => {
                         history.push('/profile')
                     })
                 } else {
-                    res.json().then(err => dispatch({ type: 'error', payload: err }))
+                    res.json().then(err => setUserErrors(err))
                 }
             })
     }
@@ -117,9 +117,6 @@ const userReducer = (state = initialState, action) => {
 
         case "update":
             return action.payload
-
-        case "error":
-            return { ...state, errors: action.payload }
 
         default:
             return state

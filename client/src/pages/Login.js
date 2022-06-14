@@ -11,12 +11,14 @@ import { useSelector } from 'react-redux';
 function Login() {
     const history = useHistory()
     const dispatch = useDispatch()
-    const errors = useSelector(state => state.user.errors)
+    const [userError, setUserError] = useState()
 
     const [formData, setFormData] = useState({
         username: "",
         password: ""
     })
+
+    console.log(userError)
 
     function handleChange(e) {
         const key = e.target.name
@@ -30,7 +32,7 @@ function Login() {
     function handleLogin(e) {
         e.preventDefault()
 
-        dispatch(logIn(formData, history))
+        dispatch(logIn(formData, history, setUserError))
     }
 
     return (
@@ -71,9 +73,9 @@ function Login() {
                             </Button>
                         </Row>
 
-                        {errors ? errors.errors.map(error =>
+                        {userError ? (
                             <Row className="text-danger text-center">
-                                <strong>{error}</strong>
+                                <strong>{userError.error}</strong>
                             </Row>
                         ) : null}
                     </Form>
