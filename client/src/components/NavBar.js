@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
@@ -9,6 +10,7 @@ import { logOut } from '../features/userSlice'
 function NavBar() {
     const auth = useSelector(state => state.user.authorized)
     const dispatch = useDispatch()
+    const history = useHistory()
 
     function handleLogout() {
         dispatch(logOut())
@@ -19,16 +21,16 @@ function NavBar() {
             <Container>
                 {auth
                     ? <>
-                        <Navbar.Brand href="/">BandBooker</Navbar.Brand>
+                        <Navbar.Brand onClick={() => history.push("/")}>BandBooker</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link href="/createlisting">Create a Listing</Nav.Link>
-                                <Nav.Link href="/yourlistings">Your Listings</Nav.Link>
-                                <Nav.Link href="/bands">Bands</Nav.Link>
-                                <Nav.Link href="/about">About</Nav.Link>
+                                <Nav.Link onClick={() => history.push("/createlisting")}>Create a Listing</Nav.Link>
+                                <Nav.Link onClick={() => history.push("/yourlistings")}>Your Listings</Nav.Link>
+                                <Nav.Link onClick={() => history.push("/bands")}>Bands</Nav.Link>
+                                <Nav.Link onClick={() => history.push("/about")}>About</Nav.Link>
                                 <NavDropdown title="More" id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="/profile">Your Profile</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => history.push("/profile")}>Your Profile</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={handleLogout}>Log Out</NavDropdown.Item>
                                 </NavDropdown>
@@ -36,13 +38,13 @@ function NavBar() {
                         </Navbar.Collapse>
                     </>
                     : <>
-                        <Navbar.Brand href="/">BandBooker</Navbar.Brand>
+                        <Navbar.Brand onClick={() => history.push("/")}>BandBooker</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link href="/bands">Bands</Nav.Link>
-                                <Nav.Link href="/about">About</Nav.Link>
-                                <Nav.Link href="/login">Log In / Sign Up </Nav.Link>
+                                <Nav.Link onClick={() => history.push("/bands")}>Bands</Nav.Link>
+                                <Nav.Link onClick={() => history.push("/about")}>About</Nav.Link>
+                                <Nav.Link onClick={() => history.push("/login")}>Log In / Sign Up </Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </>}

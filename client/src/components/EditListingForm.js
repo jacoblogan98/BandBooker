@@ -7,7 +7,6 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import { useDispatch } from 'react-redux';
 import { editListing } from '../features/listingSlice';
-import { useSelector } from 'react-redux';
 
 
 function EditListingForm() {

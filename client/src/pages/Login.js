@@ -6,7 +6,6 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/esm/Form";
 import { useDispatch } from 'react-redux';
 import { logIn } from '../features/userSlice';
-import { useSelector } from 'react-redux';
 
 function Login() {
     const history = useHistory()
@@ -17,8 +16,6 @@ function Login() {
         username: "",
         password: ""
     })
-
-    console.log(userError)
 
     function handleChange(e) {
         const key = e.target.name
